@@ -11,6 +11,9 @@ $(call inherit-product-if-exists, vendor/essential/mata/mata-vendor.mk)
 # Device
 $(call inherit-product, device/essential/mata/device.mk)
 
+GAPPS_VARIANT := nano
+$(call inherit-product-if-exists, vendor/opengapps/build/opengapps-packages.mk)
+
 # TWRP
 ifeq ($(WITH_TWRP),true)
 $(call inherit-product, device/essential/mata/twrp/twrp.mk)
