@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013-2016, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2018, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -177,6 +177,14 @@ int IPACM_ConntrackClient::IPA_Conntrack_Filters_Ignore_Bridge_Addrs
 	/* retrieve bridge interface ipv4 address */
 	memset(&ifr, 0, sizeof(struct ifreq));
 	ifr.ifr_addr.sa_family = AF_INET;
+
+	if(strlen(IPACM_Iface::ipacmcfg->ipa_virtual_iface_name) >= sizeof(ifr.ifr_name))
+	{
+		IPACMERR("interface name overflows: len %zu\n",
+			strlen(IPACM_Iface::ipacmcfg->ipa_virtual_iface_name));
+		close(fd);
+		return -1;
+	}
 	(void)strlcpy(ifr.ifr_name, IPACM_Iface::ipacmcfg->ipa_virtual_iface_name, sizeof(ifr.ifr_name));
 	IPACMDBG("bridge interface name (%s)\n", ifr.ifr_name);
 
