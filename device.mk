@@ -347,10 +347,7 @@ PRODUCT_PACKAGES += \
 
 # Telephony
 PRODUCT_PACKAGES += \
-    telephony-ext
-
-PRODUCT_BOOT_JARS += \
-    telephony-ext
+    qti-telephony-common
 
 # Tethering
 PRODUCT_PROPERTY_OVERRIDES += \
