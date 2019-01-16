@@ -31,6 +31,9 @@ PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
 
+# Audio configuration file
+-include $(TOPDIR)hardware/qcom/audio/configs/msm8998/msm8998.mk
+
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@4.0-impl:32 \
