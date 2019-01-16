@@ -172,7 +172,8 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USES_MKE2FS := true
 
-# Recovery
+# Recover
+TARGET_RECOVERY_FSTAB := device/essential/mata/rootdir/etc/fstab.mata
 TARGET_RECOVERY_UI_MARGIN_WIDTH := 64
 
 # Root
