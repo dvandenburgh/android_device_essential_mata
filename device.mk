@@ -124,7 +124,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl:32 \
     android.hardware.camera.provider@2.4-service \
     libxml2 \
-    Snap
+    ParanoidCamera
 
 # Dalvik
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -134,10 +134,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heaptargetutilization=0.75 \
     dalvik.vm.heapminfree=512k \
     dalvik.vm.heapmaxfree=8m
-
-# Device settings
-PRODUCT_PACKAGES += \
-    DeviceSettings
 
 # Display
 PRODUCT_PACKAGES += \
@@ -223,10 +219,6 @@ PRODUCT_PACKAGES += \
 # Led packages
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.mata
-
-# LiveDisplay native
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@1.0-service-sdm
 
 # Media
 PRODUCT_COPY_FILES += \
