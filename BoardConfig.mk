@@ -18,6 +18,8 @@ DEVICE_PATH := device/essential/mata
 
 -include $(QCPATH)/common/msm8998/BoardConfigVendor.mk
 
+ALLOW_MISSING_DEPENDENCIES=true
+
 # Platform
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
