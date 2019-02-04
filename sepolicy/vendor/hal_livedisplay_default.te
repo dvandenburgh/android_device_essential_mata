@@ -1,1 +1,2 @@
+type hal_livedisplay_default, domain;
 r_dir_file(hal_livedisplay_default, sysfs_graphics)
