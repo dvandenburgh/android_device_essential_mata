@@ -581,6 +581,7 @@ on boot
 on charger
     setprop persist.sys.usb.config mass_storage
     load_system_props
+    start vendor.qcom-post-boot
     write /sys/class/leds/lcd-backlight/brightness  80
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
@@ -672,11 +673,7 @@ on property:sys.boot_completed=1
     # WDSP FW boot sysfs node used by STHAL
     chown media audio /sys/kernel/wcd_cpe0/fw_name
 
-    # Let kernel know our image version/variant/crm_version
-    write /sys/devices/soc0/select_image 10
-    write /sys/devices/soc0/image_version "10:${ro.build.id}:${ro.build.version.incremental}"
-    write /sys/devices/soc0/image_variant "${ro.product.name}-${ro.build.type}"
-    write /sys/devices/soc0/image_crm_version "REL"
+    start vendor.qcom-post-boot
 
 on property:vendor.usb.config=*
    start usbd
@@ -742,6 +739,7 @@ service vendor.hbtp /vendor/bin/hbtp_daemon
     group system
     capabilities SYS_NICE
     ioprio rt 4
+    disabled
 
 on property:vendor.grip.status=*
     exec u:r:hbtp_cmd:s0 root system -- /vendor/bin/hbtp_cmd.sh grip ${vendor.grip.status}
@@ -855,6 +853,19 @@ on property:sys.qbcharger.enable=true
 
 on property:sys.qbcharger.enable=false
     stop vendor.qbcharger
+
+service vendor.qcom-post-boot /vendor/bin/init.qcom.post_boot.sh
+    class late_start
+    user root
+    disabled
+    oneshot
+
+# qcom-power triggers this property
+on property:sys.post_boot.parsed=1
+    # Setup permission for powerHAL
+    chown system system /sys/devices/soc/soc:qcom,cpubw/devfreq/soc:qcom,cpubw/bw_hwmon/hyst_trigger_count
+    chown system system /sys/devices/soc/soc:qcom,cpubw/devfreq/soc:qcom,cpubw/bw_hwmon/hist_memory
+    chown system system /sys/devices/soc/soc:qcom,cpubw/devfreq/soc:qcom,cpubw/bw_hwmon/hyst_length
 
 service vendor.qseecomd /vendor/bin/qseecomd
     class core
